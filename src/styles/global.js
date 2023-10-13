@@ -19,7 +19,7 @@ export default createGlobalStyle`
 
   body, input, button, textarea {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     outline: none;
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
   }

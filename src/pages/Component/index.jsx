@@ -5,16 +5,12 @@ import { Button } from '../../components/Button'
 import { ButtonAdd } from '../../components/ButtonAdd'
 import { Tag } from '../../components/Tag'
 import { DishInfo } from '../../components/DishInfo'
+import { Header } from '../../components/Header'
 
 export function Component() {
   return (
     <Container>
-      <Input />
-      <Button />
-      <ButtonAdd />
-      <Tag />
-      <Footer />
-      <DishInfo />
+      <Header />
     </Container>
   )
 }
