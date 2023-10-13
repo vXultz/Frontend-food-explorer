@@ -11,14 +11,14 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 
-  padding: 0 4.7rem 0 6.5rem;
+  padding: 0 4.5rem 0 6.5rem;
 
   .logo {
     display: flex;
     align-items: center;
-    margin-bottom: 7.3rem;
+    margin-bottom: 7rem;
 
-    gap: 1.1rem;
+    gap: 1rem;
 
     img {
       width: 4rem;
@@ -68,7 +68,6 @@ export const Container = styled.div`
 
 
   @media (min-width: ${DEVICE_BREAKPOINTS.desktop}) {
-    height: 62rem;
     display: grid;
     grid-template-areas:
     "logo form";
@@ -96,12 +95,13 @@ export const Container = styled.div`
     }
 
     form {
-      background: ${({ theme }) => theme.COLORS.DARK_700};
+      min-width: 50rem;
       padding: 6.4rem;
-      border-radius: 1.6rem;
+      margin-left: 5rem;
 
-      max-width: 50rem;
-      min-width: 40rem;
+      border-radius: 1.6rem;
+      
+      background: ${({ theme }) => theme.COLORS.DARK_700};
 
       h2 {
         display: flex;

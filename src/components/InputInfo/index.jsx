@@ -1,6 +1,6 @@
 import { Container } from "./styles";
 
-export function DishInfo({ ...rest }) {
+export function InputInfo({ ...rest }) {
   return (
     <Container {...rest}>
     </Container>

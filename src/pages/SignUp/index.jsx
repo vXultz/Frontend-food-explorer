@@ -5,7 +5,7 @@ import img from '../../assets/polygon.svg'
 import { Button } from '../../components/Button'
 import { InputInfo } from '../../components/InputInfo'
 
-export function SignIn() {
+export function SignUp() {
   return (
     <Container>
       <div className='logo'>
@@ -13,7 +13,15 @@ export function SignIn() {
         <h1>Food Explorer</h1>
       </div>
       <form action="">
-        <h2>Login</h2>
+        <h2>Create your account</h2>
+        <div className='inputData'>
+          <label htmlFor="name">Name</label>
+          <InputInfo
+            id='name'
+            placeholder='Example: John Smith'
+            type='text'
+          />
+        </div>
         <div className='inputData'>
           <label htmlFor="email">E-mail</label>
           <InputInfo
@@ -30,8 +38,8 @@ export function SignIn() {
             type='password'
           />
         </div>
-        <Button title='Sign in' />
-        <a href="">Create account</a>
+        <Button title='Create account' />
+        <a href="">Already have an account</a>
       </form>
     </Container>
   )
