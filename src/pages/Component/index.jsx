@@ -6,11 +6,13 @@ import { ButtonAdd } from '../../components/ButtonAdd'
 import { Tag } from '../../components/Tag'
 import { DishInfo } from '../../components/DishInfo'
 import { Header } from '../../components/Header'
+import { Card } from '../../components/Card'
+import { Carousel } from '../../components/Carousel'
 
 export function Component() {
   return (
     <Container>
-      <Header />
+      <Carousel />
     </Container>
   )
 }
