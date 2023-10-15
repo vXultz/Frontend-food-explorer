@@ -1,5 +1,7 @@
 import { Container } from './styles'
 
+import { Link } from 'react-router-dom'
+
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Button } from '../../components/Button'
@@ -14,7 +16,7 @@ export function NewDish() {
     <Container>
       <Header />
       <div className='content'>
-        <a href=""><FiChevronLeft size={22} /> Return</a>
+        <Link to="/"><FiChevronLeft size={22} /> Return</Link>
         <h1>New dish</h1>
         <form action="">
           <div className='input-wrapper image'>

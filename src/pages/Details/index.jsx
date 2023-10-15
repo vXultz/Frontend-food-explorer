@@ -1,5 +1,7 @@
 import { Container } from './styles'
 
+import { Link } from 'react-router-dom'
+
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer"
 import { ButtonAdd } from "../../components/ButtonAdd"
@@ -14,7 +16,7 @@ export function Details() {
     <Container>
       <Header />
       <div className='content'>
-        <a href="/"><FiChevronLeft />Return</a>
+        <Link to="/"><FiChevronLeft />Return</Link>
         <img src={img} alt="dish photo" />
         <div className='info'>
           <h1>Dish name</h1>

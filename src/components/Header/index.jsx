@@ -1,26 +1,35 @@
 import { Container, Menu, Logo, Click } from './styles'
-import polygon from "../../assets/polygon.svg";
+import polygon from "../../assets/polygon.svg"
 
 import { Input } from '../Input'
 import { Footer } from '../Footer'
 import { Button } from '../Button'
 import { ButtonAdd } from '../ButtonAdd'
 
+import { Link, useNavigate } from 'react-router-dom'
 
 import { FiMenu } from 'react-icons/fi'
 import { PiReceipt, PiSignOut, PiX } from 'react-icons/pi'
 
-import { useState } from "react";
+import { useState } from "react"
 
 
 
 export function Header() {
 
-  const [hideMenu, setHideMenu] = useState(true);
+  const [hideMenu, setHideMenu] = useState(true)
+  const navigate = useNavigate()
+
 
   function handleMenu() {
     setHideMenu(!hideMenu)
   }
+
+  function handleNewDish() {
+    navigate("/newdish")
+  }
+
+
 
   return (
     <Container>
@@ -35,7 +44,7 @@ export function Header() {
           />
           <ul>
             <li>
-              <a href="">New dish</a>
+              <Link to="/newdish">New dish</Link>
             </li>
             <li>
               <a>Logout</a>
@@ -64,7 +73,11 @@ export function Header() {
           <span>0</span>
         </Click>
 
-        <Button className='desktop button' title='New dish' />
+        <Button
+          className='desktop button'
+          title='New dish'
+          onClick={handleNewDish}
+        />
 
         <Click className='desktop button'>
           <ButtonAdd title='Orders' price='(0)' />

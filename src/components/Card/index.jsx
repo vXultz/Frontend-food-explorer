@@ -1,6 +1,7 @@
 import { Container } from "./styles"
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom"
 
 import { Button } from '../Button'
 import img from '../../assets/prato1.png'
@@ -10,15 +11,22 @@ import { FiPlus, FiMinus, FiHeart } from "react-icons/fi";
 
 export function Card() {
 
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(false)
+
+  const navigate = useNavigate()
+
   const handleFillHeart = () => {
-    setActive(!active);
+    setActive(!active)
+  }
+
+  function handleDetails() {
+    navigate('/dishes/1')
   }
 
   return (
     <Container>
       <img src={img} alt="dish photo" />
-      <h1>Dish name</h1>
+      <h1 onClick={handleDetails}>Dish name</h1>
       <p className="desktop">Description</p>
       <span>$23,99</span>
       <div className="bottom">
