@@ -25,7 +25,7 @@ export const Container = styled.div`
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.desktop}) {
-    padding: 2.4rem 12.3rem;
+    padding: 2.4rem 6rem;
     
     #header {
       gap: 3.2rem;
@@ -44,7 +44,7 @@ export const Container = styled.div`
     }
 
     .button {
-      max-width: 21.6rem;
+      max-width: 18rem;
       min-width: 16rem;
     }
   }
@@ -164,6 +164,9 @@ export const Click = styled.div`
   svg {
     position: relative;
     font-size: 3.2rem;
+
+    cursor: pointer;
+    
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
   }
 

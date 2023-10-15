@@ -6,20 +6,24 @@ import { Footer } from '../Footer'
 import { Button } from '../Button'
 import { ButtonAdd } from '../ButtonAdd'
 
-import { Link, useNavigate } from 'react-router-dom'
-
 import { FiMenu } from 'react-icons/fi'
 import { PiReceipt, PiSignOut, PiX } from 'react-icons/pi'
 
+import { Link, useNavigate } from 'react-router-dom'
+
+
 import { useState } from "react"
+import { useAuth } from '../../hooks/auth'
 
 
 
-export function Header() {
-
+export function Header({ onChange }) {
   const [hideMenu, setHideMenu] = useState(true)
+  const { user, signOut, orderItems } = useAuth()
+
   const navigate = useNavigate()
 
+  const isAdmin = user.isAdmin === 1
 
   function handleMenu() {
     setHideMenu(!hideMenu)
@@ -29,6 +33,11 @@ export function Header() {
     navigate("/newdish")
   }
 
+  function handleSearch(e) {
+    if (e.key === 'Enter') {
+      setHideMenu(true);
+    }
+  }
 
 
   return (
@@ -41,13 +50,15 @@ export function Header() {
           </div>
           <Input
             placeholder='Search for dishes or ingredients'
+            onChange={onChange}
+            onKeyDown={handleSearch}
           />
           <ul>
             <li>
-              <Link to="/newdish">New dish</Link>
+              {isAdmin ? <Link to="/newdish">New dish</Link> : ''}
             </li>
             <li>
-              <a>Logout</a>
+              <a onClick={signOut}>Logout</a>
             </li>
           </ul>
           <Footer className='footer' />
@@ -61,29 +72,33 @@ export function Header() {
         <Logo>
           <img src={polygon} alt="polygon logo" />
           <h1>Food Explorer</h1>
-          <span>admin</span>
+          <span>{isAdmin ? 'admin' : ''}</span>
         </Logo>
         <div className='desktop search'>
           <Input
             placeholder='Search for dishes or ingredients'
           />
         </div>
-        <Click className='mobile'>
-          <PiReceipt className='user' />
-          <span>0</span>
-        </Click>
+        {isAdmin ? <div></div> :
+          <Click className='mobile'>
+            <PiReceipt className='user' />
+            <span>0</span>
+          </Click>
+        }
 
-        <Button
-          className='desktop button'
-          title='New dish'
-          onClick={handleNewDish}
-        />
+        {isAdmin ?
+          <Button
+            className='desktop button'
+            title='New dish'
+            onClick={handleNewDish}
+          /> :
+          <Click className='desktop button'>
+            <ButtonAdd title='Orders' price={orderItems} />
+          </Click>
+        }
 
-        <Click className='desktop button'>
-          <ButtonAdd title='Orders' price='(0)' />
-        </Click>
 
-        <Click className='desktop'>
+        <Click className='desktop' onClick={signOut}>
           <PiSignOut size={32} />
         </Click>
       </div>

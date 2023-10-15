@@ -1,17 +1,24 @@
 import { Container } from "./styles"
-import { useState } from "react";
 
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { api } from "../../services/api"
+import { useAuth } from "../../hooks/auth"
 
 import { Button } from '../Button'
-import img from '../../assets/prato1.png'
+import placeholderImg from '../../assets/placeholder.png'
+import { PiPencilSimple } from "react-icons/pi"
+import { FiPlus, FiMinus, FiHeart } from "react-icons/fi"
 
-import { PiPencilSimple } from "react-icons/pi";
-import { FiPlus, FiMinus, FiHeart } from "react-icons/fi";
+export function Card({ data, ...rest }) {
+  const { user, setOrder } = useAuth()
+  const isAdmin = user.isAdmin === 1
 
-export function Card() {
-
+  const [quantity, setQuantity] = useState(1)
   const [active, setActive] = useState(false)
+
+  const image = data.image ? `${api.defaults.baseURL}/files/${data.image}` : placeholderImg
+
 
   const navigate = useNavigate()
 
@@ -20,33 +27,65 @@ export function Card() {
   }
 
   function handleDetails() {
-    navigate('/dishes/1')
+    navigate(`/dishes/${data.id}`)
+  }
+
+  function handleEditDish() {
+    navigate(`/editdish/${data.id}`)
+  }
+
+  function handlePlus() {
+    setQuantity(quantity + 1);
+  }
+
+  function handleMinus() {
+    quantity <= 1 ? setQuantity(1) :
+      setQuantity(quantity - 1);
+  }
+
+  function handleSetOrder(data, quantity) {
+    const dish_id = data.id
+    setOrder({ dish_id, quantity })
   }
 
   return (
-    <Container>
-      <img src={img} alt="dish photo" />
-      <h1 onClick={handleDetails}>Dish name</h1>
-      <p className="desktop">Description</p>
-      <span>$23,99</span>
+    <Container {...rest}>
+      <img src={image} alt="dish photo" />
+      <h1 onClick={handleDetails}>{data.name}</h1>
+      <p className="desktop">{data.description}</p>
+      <span>$ {data.price}</span>
       <div className="bottom">
-        <section>
-          <button>
-            <FiMinus size={24} />
-          </button>
-          <p>0</p>
-          <button>
-            <FiPlus size={24} />
-          </button>
-        </section>
-        <Button id='buttonAdd' title='add' />
+        {isAdmin ? '' :
+          <section>
+            <button>
+              <FiMinus size={24} onClick={handleMinus} />
+            </button>
+            <p>{String(quantity).padStart(2, '0')}</p>
+            <button>
+              <FiPlus size={24} onClick={handlePlus} />
+            </button>
+          </section>
+        }
+
+        {isAdmin ? '' :
+          <Button
+            id='buttonAdd'
+            title='add'
+            onClick={() => handleSetOrder(data, quantity)}
+          />}
       </div>
       <div className="heart">
-        <FiHeart
-          size={24}
-          onClick={handleFillHeart}
-          fill={active ? 'white' : 'none'}
-        />
+        {isAdmin ?
+          <PiPencilSimple
+            size={24}
+            onClick={handleEditDish}
+          /> :
+          <FiHeart
+            size={24}
+            onClick={handleFillHeart}
+            fill={active ? 'white' : 'none'}
+          />
+        }
       </div>
     </Container>
   )
