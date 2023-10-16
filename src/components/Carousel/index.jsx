@@ -15,8 +15,6 @@ export function Carousel({ search }) {
   const [types, setTypes] = useState([])
   const [dish, setDish] = useState([])
 
-  const useGap = dish.length <= 3 ? true : false;
-
 
   useEffect(() => {
     async function fetchType() {
@@ -53,15 +51,14 @@ export function Carousel({ search }) {
                 rewind: true,
                 width: '100%',
                 perPage: 4,
-                gap: useGap ? '25rem' : '',
                 breakpoints: {
-                  1489: {
+                  1440: {
                     perPage: 3
                   },
-                  1182: {
+                  1024: {
                     perPage: 2
                   },
-                  833: {
+                  800: {
                     perPage: 1
                   }
                 },
