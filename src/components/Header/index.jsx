@@ -83,7 +83,7 @@ export function Header({ onChange }) {
         {isAdmin ? <div></div> :
           <Click className='mobile'>
             <PiReceipt className='user' />
-            <span>0</span>
+            <span>{orderItems}</span>
           </Click>
         }
 

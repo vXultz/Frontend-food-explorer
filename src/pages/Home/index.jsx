@@ -11,6 +11,8 @@ import { api } from '../../services/api'
 import { useState, useEffect } from 'react'
 import { useAuth } from '../../hooks/auth'
 
+import { FiXCircle } from 'react-icons/fi'
+
 
 export function Home() {
   const [search, setSearch] = useState('')
@@ -27,7 +29,7 @@ export function Home() {
 
     async function fetchDishes() {
       if (search === '') {
-        const response = await api.get(`/dishes?name`)
+        const response = await api.get(`/dishes?search=${search}`)
         setDishes(response.data);
       }
       else {
@@ -75,6 +77,11 @@ export function Home() {
                     )
                     )
                   }
+                  {dishes
+                    .filter(d => d.type === type.name)
+                    .length === 0 && (
+                      <p className="noDishes"> <FiXCircle size={10} />Nenhum prato encontrado.</p>
+                    )}
                 </div>
               </section>
             ))

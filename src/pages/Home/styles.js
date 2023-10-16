@@ -51,7 +51,7 @@ export const Container = styled.div`
         line-height: 140%;
       }
 
-      animation: slideRight .7s ease-in;
+      animation: slideRight 1s ease-in;
     }
     }
 
