@@ -77,6 +77,7 @@ export function Header({ onChange }) {
         <div className='desktop search'>
           <Input
             placeholder='Search for dishes or ingredients'
+            onChange={onChange}
           />
         </div>
         {isAdmin ? <div></div> :

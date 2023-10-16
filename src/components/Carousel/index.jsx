@@ -1,4 +1,4 @@
-import { Container, Gradient } from "./styles"
+import { Container } from "./styles"
 
 import { Card } from "../../components/Card"
 
@@ -15,6 +15,8 @@ export function Carousel({ search }) {
   const [types, setTypes] = useState([])
   const [dish, setDish] = useState([])
 
+  const useGap = dish.length <= 3 ? true : false;
+
 
   useEffect(() => {
     async function fetchType() {
@@ -23,8 +25,14 @@ export function Carousel({ search }) {
     }
 
     async function fetchDishes() {
-      const response = await api.get(`/dishes?search=${search}`)
-      setDish(response.data);
+      if (search === '') {
+        const response = await api.get(`/dishes?search=${search}`)
+        setDish(response.data);
+      }
+      else {
+        const response = await api.get(`/dishes?search=${search}`)
+        setDish(response.data);
+      }
     }
 
     fetchType()
@@ -44,7 +52,19 @@ export function Carousel({ search }) {
               options={{
                 rewind: true,
                 width: '100%',
-                perPage: 3,
+                perPage: 4,
+                gap: useGap ? '25rem' : '',
+                breakpoints: {
+                  1489: {
+                    perPage: 3
+                  },
+                  1182: {
+                    perPage: 2
+                  },
+                  833: {
+                    perPage: 1
+                  }
+                },
               }}
             >
               <SplideTrack>
@@ -74,8 +94,6 @@ export function Carousel({ search }) {
                 </button>
               </div>
             </Splide>
-            <Gradient className='left' />
-            <Gradient className='right' />
           </div>
         </section>
       ))

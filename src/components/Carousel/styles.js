@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
+  
   .cards {
-    height: 46rem;
+    height: 60rem;
   }
   .splide__arrow {
     width: 10%;
@@ -38,7 +39,6 @@ export const Gradient = styled.div`
   width: 22.4rem;
   height: 100%;
 
-  position: absolute;
   pointer-events: none;
 
   background: ${({ theme }) => theme.COLORS.GRADIENT_100};

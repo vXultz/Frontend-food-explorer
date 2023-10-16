@@ -29,6 +29,8 @@ export const Container = styled.div`
       position: absolute;
       left: -3rem;
       bottom: 0;
+
+      animation: slideRight 1s ease-in;
     }
 
     .macaronText {

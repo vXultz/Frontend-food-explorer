@@ -19,6 +19,9 @@ export function Card({ data, ...rest }) {
 
   const image = data.image ? `${api.defaults.baseURL}/files/${data.image}` : placeholderImg
 
+  const itemPrice = data.price
+
+  const finalPrice = itemPrice * quantity
 
   const navigate = useNavigate()
 
@@ -53,7 +56,7 @@ export function Card({ data, ...rest }) {
       <img src={image} alt="dish photo" />
       <h1 onClick={handleDetails}>{data.name}</h1>
       <p className="desktop">{data.description}</p>
-      <span>$ {data.price}</span>
+      <span>$ {finalPrice.toFixed(2)}</span>
       <div className="bottom">
         {isAdmin ? '' :
           <section>

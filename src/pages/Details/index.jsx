@@ -29,6 +29,11 @@ export function Details() {
 
   const image = data.image ? `${api.defaults.baseURL}/files/${data.image}` : placeholderImg
 
+  const itemPrice = data.price
+
+  const finalPrice = itemPrice * quantity
+
+
   function handleEditDish() {
     navigate(`/editdish/${params.id}`)
   }
@@ -70,7 +75,7 @@ export function Details() {
           <h1>{data.name}</h1>
           <p>{data.description}</p>
           {data.ingredients &&
-            <div className="ingredients">
+            <div className="tags">
               {data.ingredients.map(ingredient => (
                 <Tag
                   key={String(ingredient.id)}
@@ -99,6 +104,7 @@ export function Details() {
               </div>
               <ButtonAdd
                 text='Order - $'
+                price={finalPrice.toFixed(2)}
                 onClick={() => handleSetOrder(data, quantity)}
               />
             </section>

@@ -26,13 +26,19 @@ export function Home() {
     }
 
     async function fetchDishes() {
-      const response = await api.get(`/dishes?search=${search}`)
-      setDishes(response.data)
+      if (search === '') {
+        const response = await api.get(`/dishes?name`)
+        setDishes(response.data);
+      }
+      else {
+        const response = await api.get(`/dishes?search=${search}`)
+        setDishes(response.data);
+      }
     }
 
     fetchTypes();
     fetchDishes();
-  }, [search, dishes])
+  }, [search])
 
   useEffect(() => {
     addOrder()
